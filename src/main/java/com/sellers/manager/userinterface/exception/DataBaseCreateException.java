@@ -1,6 +1,5 @@
 package com.sellers.manager.userinterface.exception;
 
-import br.com.bradescoseguros.opin.application.dto.exception.BaseException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,14 +10,14 @@ import java.util.List;
 @Setter
 public class DataBaseCreateException extends RuntimeException implements Serializable {
 
-    private final List<BaseException>  objDataBase;
+    private final List<Exception>  objDataBase;
 
     public DataBaseCreateException(String msg) {
         super(msg);
         objDataBase = null;
     }
 
-    public DataBaseCreateException(String msg, List<BaseException> objDataBase) {
+    public DataBaseCreateException(String msg, List<Exception> objDataBase) {
         super(msg);
         this.objDataBase = objDataBase;
     }
