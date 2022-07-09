@@ -1,10 +1,8 @@
 package com.sellers.manager.userinterface.handler;
 
-import br.com.bradescoseguros.opin.application.dto.ErrorDetailDTO;
-import br.com.bradescoseguros.opin.application.dto.ErrorDetailDTO.ErrorDetailDTOBuilder;
-import br.com.bradescoseguros.opin.application.enums.ErrorType;
-import br.com.bradescoseguros.opin.userinterface.exception.*;
-import feign.FeignException;
+import com.sellers.manager.application.dto.ErrorDetailDTO;
+import com.sellers.manager.application.enums.ErrorType;
+import com.sellers.manager.userinterface.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,39 +24,6 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class RestControllerAdviceHandler extends ResponseEntityExceptionHandler {
-    
-    @ExceptionHandler(FeignException.class)
-    public ResponseEntity<Object> handleFeignException(FeignException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.valueOf(ex.status());
-        ErrorType errorType = ErrorType.BAD_REQUEST;
-        String detail = "Usuário não existe";
-        ErrorDetailDTO apiError = createApiErrorBuilder(status, errorType, detail)
-                .detail(detail)
-                .build();
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
-    }
-
-    @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<Object> handleForbiddenException(ForbiddenException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.FORBIDDEN;
-        ErrorType errorType = ErrorType.FORBIDDEN;
-        String detail = ex.getMessage();
-        ErrorDetailDTO apiError = createApiErrorBuilder(status, errorType, detail)
-                .detail(detail)
-                .build();
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
-    }
-
-    @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<Object> handleUnauthorizedException(UnauthorizedException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.UNAUTHORIZED;
-        ErrorType errorType = ErrorType.UNAUTHORIZED;
-        String detail = ex.getMessage();
-        ErrorDetailDTO apiError = createApiErrorBuilder(status, errorType, detail)
-                .detail(detail)
-                .build();
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
-    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleUnexpectedException(Exception ex, WebRequest request) {
@@ -93,16 +58,6 @@ public class RestControllerAdviceHandler extends ResponseEntityExceptionHandler 
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
     }
 
-    @ExceptionHandler(ExternalServiceProcessingError.class)
-    public ResponseEntity<Object> handleExternalServiceProcessingError(ExternalServiceProcessingError ex, WebRequest request) {
-        HttpStatus status = HttpStatus.BAD_GATEWAY;
-        ErrorType errorType = ErrorType.BAD_GATEWAY;
-        String detail = "Erro na conexão com API externa";
-        ErrorDetailDTO apiError = createApiErrorBuilder(status, errorType, detail)
-                .detail(detail)
-                .build();
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
-    }
 
     @ExceptionHandler({BadRequestException.class, MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleDatabaseCreateException(Exception ex, WebRequest request) {
@@ -164,7 +119,7 @@ public class RestControllerAdviceHandler extends ResponseEntityExceptionHandler 
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
     }
 
-    private ErrorDetailDTOBuilder createApiErrorBuilder(HttpStatus status, ErrorType errorType, String detail) {
+    private ErrorDetailDTO.ErrorDetailDTOBuilder createApiErrorBuilder(HttpStatus status, ErrorType errorType, String detail) {
         return ErrorDetailDTO.builder()
                 .requestDateTime(LocalDateTime.now())
                 .code(status.value())
