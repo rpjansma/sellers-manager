@@ -47,6 +47,17 @@ public class RestControllerAdviceHandler extends ResponseEntityExceptionHandler 
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(NoContentException.class)
+    public ResponseEntity<Object> handleNoContent(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ErrorType errorType = ErrorType.NOT_FOUND;
+        String detail = ex.getMessage();
+        ErrorDetailDTO apiError = createApiErrorBuilder(status, errorType, detail)
+                .detail(detail)
+                .build();
+        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
+    }
+
     @ExceptionHandler(InternalServerErrorException.class)
     public ResponseEntity<Object> handleInternalServerError(InternalServerErrorException ex, WebRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;

@@ -1,0 +1,59 @@
+package com.sellers.manager.application.service;
+
+import com.sellers.manager.application.assembler.RegionAssembler;
+import com.sellers.manager.application.dto.RegionDTO;
+import com.sellers.manager.application.entity.Region;
+import com.sellers.manager.application.gateway.RegionGateway;
+import com.sellers.manager.application.validator.RegionValidator;
+import com.sellers.manager.userinterface.exception.NoContentException;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@AllArgsConstructor
+public class RegionService {
+
+    private final RegionGateway regionGateway;
+    private final RegionValidator regionValidator;
+    private final RegionAssembler regionAssembler;
+
+    public List<Region> getAllRegions() {
+        return regionGateway.getAllRegions();
+    }
+
+    public Region getById(Integer regionId) {
+        Optional<Region> region = Optional.ofNullable(regionGateway.getById(regionId)
+                .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
+
+        return region.get();
+    }
+
+    public RegionDTO createRegion(RegionDTO regionDTO) {
+
+        List<Region> regionsRegistered = regionGateway.getAllRegions();
+        regionValidator.regionUniqueName(regionsRegistered, regionDTO);
+
+        Region region = regionAssembler.toRegion(regionDTO);
+        regionGateway.save(region);
+
+        return regionAssembler.toRegionDTO(region);
+    }
+
+    public void pathRegion(RegionDTO regionDTO, Integer regionId) {
+        Optional.ofNullable(regionGateway.getById(regionId)
+                .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
+        Region region = regionAssembler.toRegion(regionDTO);
+
+        regionGateway.save(region);
+    }
+
+    public void deleteRegion(Integer RegionId) {
+        Optional<Region> region = regionGateway.getById(RegionId);
+        regionValidator.checkRegionPresent(region);
+        regionGateway.deleteRegion(RegionId);
+    }
+
+}
