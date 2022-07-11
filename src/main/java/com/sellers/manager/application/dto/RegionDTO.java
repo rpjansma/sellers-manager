@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -22,4 +23,8 @@ public class RegionDTO {
 
     @NotNull
     private List<StateEnum> states;
+
+    private Date dhRecordInclusion;
+
+    private Date dhUpdateRecord;
 }

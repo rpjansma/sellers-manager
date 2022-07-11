@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
+@Table(name = "ACTUATION_REGION")
 public class Region {
 
     @Id
