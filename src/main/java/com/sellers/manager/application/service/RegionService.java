@@ -50,10 +50,10 @@ public class RegionService {
         regionGateway.save(region);
     }
 
-    public void deleteRegion(Integer RegionId) {
-        Optional<Region> region = regionGateway.getById(RegionId);
+    public void deleteRegion(Integer regionId) {
+        Optional<Region> region = regionGateway.getById(regionId);
         regionValidator.checkRegionPresent(region);
-        regionGateway.deleteRegion(RegionId);
+        regionGateway.deleteRegion(regionId);
     }
 
 }

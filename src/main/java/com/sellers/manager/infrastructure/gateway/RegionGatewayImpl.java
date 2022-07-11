@@ -22,8 +22,8 @@ public class RegionGatewayImpl implements RegionGateway {
     }
 
     @Override
-    public Region getByName(String RegionName) {
-        return regionRepository.getByName(RegionName);
+    public Region getByName(String regionName) {
+        return regionRepository.getByName(regionName);
     }
 
     @Override

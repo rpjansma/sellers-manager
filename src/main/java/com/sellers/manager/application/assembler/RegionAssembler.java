@@ -14,11 +14,11 @@ public class RegionAssembler {
         this.mapper = new ModelMapper();
     }
 
-    public Region toRegion(RegionDTO brandDTO) {
-        return mapper.map(brandDTO, Region.class);
+    public Region toRegion(RegionDTO regionDTO) {
+        return mapper.map(regionDTO, Region.class);
     }
 
-    public RegionDTO toRegionDTO(Region brand) {
-        return mapper.map(brand, RegionDTO.class);
+    public RegionDTO toRegionDTO(Region region) {
+        return mapper.map(region, RegionDTO.class);
     }
 }

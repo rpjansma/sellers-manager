@@ -6,7 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -15,15 +14,15 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ACTUATION_REGION")
-public class Region {
+@Table(name = "SELLER")
+public class Seller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "REGION_ID", nullable = false, columnDefinition = "decimal(3,0)")
+    @Column(name = "SELLER_ID", nullable = false, columnDefinition = "decimal(3,0)")
     private Integer id;
 
-    @Column(name = "REGION_NAME", length = 50, nullable = false)
+    @Column(name = "SELLER_NAME", length = 60, nullable = false)
     @NotNull
     private String name;
 

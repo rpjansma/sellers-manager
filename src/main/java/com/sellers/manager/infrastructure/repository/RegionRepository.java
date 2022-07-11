@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 public interface RegionRepository extends JpaRepository<Region, Integer> {
-    @Query("FROM Region p WHERE p.regionName = :regionName")
-    Region getByName(String regionName);
+    @Query("FROM Region p WHERE p.name = :regionName")
+    Region getByName(String name);
 
-    @Query("FROM Region p WHERE p.regionName IN :regionNames")
-    List<Region> getByNames(Collection<String> regionNames);
+    @Query("FROM Region p WHERE p.name IN :names")
+    List<Region> getByNames(Collection<String> names);
 
 }

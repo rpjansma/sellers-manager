@@ -14,12 +14,14 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
-public class RegionDTO {
+public class SellerDTO {
 
     private Integer id;
 
     @NotNull
     private String name;
+
+    private String phoneNumber;
 
     @NotNull
     private List<StateEnum> states;
