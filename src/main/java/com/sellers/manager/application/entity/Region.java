@@ -2,9 +2,12 @@ package com.sellers.manager.application.entity;
 
 import com.sellers.manager.application.enums.StateEnum;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,8 +26,16 @@ public class Region {
     @NotNull
     private String regionName;
 
-    @Column(name = "STATES", length = 50, nullable = false)
-    @NotNull
-    private List<StateEnum> states;
+    @Column(name = "INCLUSION_DATE", nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Setter(AccessLevel.NONE)
+    @CreationTimestamp
+    private Date dhRecordInclusion;
+
+    @Column(name = "LAST_UPDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Setter(AccessLevel.NONE)
+    @UpdateTimestamp
+    private Date dhUpdateRecord;
 
 }
