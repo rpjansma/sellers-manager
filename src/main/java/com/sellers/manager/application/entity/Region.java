@@ -1,20 +1,20 @@
 package com.sellers.manager.application.entity;
 
-import com.sellers.manager.application.enums.StateEnum;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ACTUATION_REGION")
 public class Region {
 
@@ -26,6 +26,8 @@ public class Region {
     @Column(name = "REGION_NAME", length = 50, nullable = false)
     @NotNull
     private String regionName;
+
+
 
     @Column(name = "INCLUSION_DATE", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
