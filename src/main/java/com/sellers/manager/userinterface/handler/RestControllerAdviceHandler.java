@@ -49,8 +49,8 @@ public class RestControllerAdviceHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(NoContentException.class)
     public ResponseEntity<Object> handleNoContent(Exception ex, WebRequest request) {
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        ErrorType errorType = ErrorType.NOT_FOUND;
+        HttpStatus status = HttpStatus.NO_CONTENT;
+        ErrorType errorType = ErrorType.NO_CONTENT;
         String detail = ex.getMessage();
         ErrorDetailDTO apiError = createApiErrorBuilder(status, errorType, detail)
                 .detail(detail)

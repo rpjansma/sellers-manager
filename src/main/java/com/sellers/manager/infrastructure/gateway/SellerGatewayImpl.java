@@ -16,7 +16,6 @@ public class SellerGatewayImpl implements SellerGateway {
 
     private final SellerRepository sellerRepository;
 
-
     @Override
     public Optional<Seller> getById(Integer id) {
         return sellerRepository.findById(id);
@@ -24,12 +23,12 @@ public class SellerGatewayImpl implements SellerGateway {
 
     @Override
     public Seller getByName(String name) {
-        return null;
+        return sellerRepository.getByName(name);
     }
 
     @Override
     public List<Seller> getByNames(Collection<String> names) {
-        return null;
+        return sellerRepository.getByNames(names);
     }
 
     @Override

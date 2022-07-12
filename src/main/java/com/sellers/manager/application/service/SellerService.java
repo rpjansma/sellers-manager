@@ -22,9 +22,10 @@ public class SellerService {
     private final SellerAssembler sellerAssembler;
 
     public List<SellerDTO> getAllSellers() {
-        sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
+        List<SellerDTO> sellersList = sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
+        if(sellersList.isEmpty()) throw new NoContentException("Vendedores não localizados.");
 
-        return sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
+        return sellersList;
     }
 
     public SellerDTO getById(Integer sellerId) {
@@ -35,7 +36,6 @@ public class SellerService {
     }
 
     public SellerDTO createSeller(SellerDTO sellerDTO) {
-
         List<Seller> sellers = sellerGateway.getAllSeller();
         sellerValidator.sellerUniqueName(sellers, sellerDTO);
 

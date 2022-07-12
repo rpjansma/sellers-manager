@@ -7,6 +7,7 @@ import java.util.Date;
 class SellerDTOTest {
 
     SellerDTO sellerDTO;
+    Integer id = 1;
     String name = "name";
     String city = "city";
     String state = "SP";
@@ -19,6 +20,7 @@ class SellerDTOTest {
     @BeforeEach
     void setUp() {
         sellerDTO = SellerDTO.builder()
+                .id(id)
                 .name(name)
                 .age(age)
                 .city(city)
@@ -49,6 +51,7 @@ class SellerDTOTest {
     @Tag("unit")
     void setters_from_sellerDTO_setting_successfully() {
 
+        id = 2;
         name = "newName";
         city = "newCity";
         state = "RJ";
@@ -58,6 +61,7 @@ class SellerDTOTest {
         dhRecordInclusion = new Date();
         dhUpdateRecord = new Date();
 
+        sellerDTO.setId(id);
         sellerDTO.setName(name);
         sellerDTO.setAge(age);
         sellerDTO.setCity(city);

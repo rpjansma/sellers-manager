@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegionDTOTest {
 
     RegionDTO regionDTO;
+    Integer id = 1;
     String name = "name";
     List<String> states = new ArrayList<>();
     Date dhRecordInclusion = new Date();
@@ -22,6 +23,7 @@ class RegionDTOTest {
         states.add("state2");
 
         regionDTO = RegionDTO.builder()
+                .id(id)
                 .name(name)
                 .states(states)
                 .dhRecordInclusion(dhRecordInclusion)
@@ -43,11 +45,13 @@ class RegionDTOTest {
     @DisplayName("Test regionDTO setters")
     @Tag("unit")
     void setters_from_regionDTO_setting_successfully() {
+        id = 2;
         name = "newName";
         states = new ArrayList<>();
         dhRecordInclusion = new Date();
         dhUpdateRecord = new Date();
 
+        regionDTO.setId(id);
         regionDTO.setName(name);
         regionDTO.setStates(states);
         regionDTO.setDhRecordInclusion(dhRecordInclusion);
