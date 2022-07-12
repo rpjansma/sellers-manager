@@ -24,8 +24,15 @@ public class RegionService {
         return regionGateway.getAllRegions();
     }
 
-    public Region getById(Integer regionId) {
+    public RegionDTO getById(Integer regionId) {
         Optional<Region> region = Optional.ofNullable(regionGateway.getById(regionId)
+                .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
+
+        return regionAssembler.toRegionDTO(region.get());
+    }
+
+    public Region getByName(String name) {
+        Optional<Region> region = Optional.ofNullable(regionGateway.getByName(name)
                 .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
 
         return region.get();

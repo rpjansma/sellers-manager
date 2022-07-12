@@ -2,10 +2,7 @@ package com.sellers.manager.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sellers.manager.application.entity.Region;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -14,6 +11,7 @@ import java.util.Date;
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class SellerDTO {
 
     private Integer id;

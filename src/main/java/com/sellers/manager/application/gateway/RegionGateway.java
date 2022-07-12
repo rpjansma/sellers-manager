@@ -11,7 +11,7 @@ public interface RegionGateway {
 
     Optional<Region> getById(Integer id);
 
-    Region getByName(String name);
+    Optional<Region> getByName(String name);
 
     List<Region> getByNames(Collection<String> names);
 

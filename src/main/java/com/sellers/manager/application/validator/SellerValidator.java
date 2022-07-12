@@ -14,8 +14,8 @@ import java.util.Optional;
 public class SellerValidator {
 
     public void sellerUniqueName(List<Seller> sellerList, SellerDTO sellerDTO) {
-        if (sellerList.stream().anyMatch(region -> region.getName().equals(sellerDTO.getName())))
-            throw new BadRequestException("O usuário " + sellerDTO.getName() + " já existe.");
+        if (sellerList.stream().anyMatch(seller -> seller.getName().equals(sellerDTO.getName())))
+            throw new BadRequestException("O vendedor " + sellerDTO.getName() + " já existe.");
     }
 
     public void checkSellerPresent(Optional<Seller> seller) {

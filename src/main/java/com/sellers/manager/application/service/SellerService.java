@@ -1,7 +1,9 @@
 package com.sellers.manager.application.service;
 
 import com.sellers.manager.application.assembler.SellerAssembler;
+import com.sellers.manager.application.dto.RegionDTO;
 import com.sellers.manager.application.dto.SellerDTO;
+import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
 import com.sellers.manager.application.validator.SellerValidator;
@@ -20,6 +22,7 @@ public class SellerService {
     private final SellerGateway sellerGateway;
     private final SellerValidator sellerValidator;
     private final SellerAssembler sellerAssembler;
+    private final RegionService regionService;
 
     public List<SellerDTO> getAllSellers() {
         List<SellerDTO> sellersList = sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
@@ -39,7 +42,10 @@ public class SellerService {
         List<Seller> sellers = sellerGateway.getAllSeller();
         sellerValidator.sellerUniqueName(sellers, sellerDTO);
 
+        Region region = regionService.getByName(sellerDTO.getRegion());
+
         Seller seller = sellerAssembler.toSeller(sellerDTO);
+        seller.setRegion(region);
         sellerGateway.save(seller);
 
         return sellerAssembler.toSellerDTO(seller);
