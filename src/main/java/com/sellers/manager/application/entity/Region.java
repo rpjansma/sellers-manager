@@ -6,7 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -23,7 +22,7 @@ public class Region {
     @Column(name = "REGION_ID", nullable = false, columnDefinition = "decimal(3,0)")
     private Integer id;
 
-    @Column(name = "REGION_NAME", length = 50, nullable = false)
+    @Column(name = "NAME", length = 50, nullable = false)
     @NotNull
     private String name;
 

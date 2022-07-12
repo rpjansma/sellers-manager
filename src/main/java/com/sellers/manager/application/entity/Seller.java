@@ -22,9 +22,26 @@ public class Seller {
     @Column(name = "SELLER_ID", nullable = false, columnDefinition = "decimal(3,0)")
     private Integer id;
 
-    @Column(name = "SELLER_NAME", length = 60, nullable = false)
+    @Column(name = "NAME", length = 60, nullable = false)
     @NotNull
     private String name;
+
+    @Column(name = "PHONE", length = 15)
+    private String phoneNumber;
+
+    @Column(name = "AGE", length = 3)
+    private Integer age;
+
+    @Column(name = "CITY", length = 40)
+    private String city;
+
+    @Column(name = "STATE", length = 2)
+    private String state;
+
+    @Column(name = "REGION", length = 15)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REGION_ID", referencedColumnName = "REGION_ID", insertable = false, updatable = false)
+    private Region region;
 
     @Column(name = "INCLUSION_DATE", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
