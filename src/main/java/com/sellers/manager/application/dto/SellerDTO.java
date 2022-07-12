@@ -35,7 +35,7 @@ public class SellerDTO {
     private String state;
 
     @JsonProperty("regiao")
-    private Region region;
+    private String region;
 
     private Date dhRecordInclusion;
     private Date dhUpdateRecord;
