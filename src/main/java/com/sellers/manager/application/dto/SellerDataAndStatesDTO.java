@@ -3,7 +3,7 @@ package com.sellers.manager.application.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Getter
@@ -11,12 +11,9 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SellerDTO {
-
-    private Integer id;
+public class SellerDataAndStatesDTO {
 
     @JsonProperty("nome")
-    @NotNull
     private String name;
 
     @JsonProperty("telefone")
@@ -31,10 +28,9 @@ public class SellerDTO {
     @JsonProperty("estado")
     private String state;
 
-    @JsonProperty("regiao")
-    private String region;
+    @JsonProperty("estados")
+    private ArrayList<String> states;
 
+    @JsonProperty("dataInclusao")
     private Date dhRecordInclusion;
-    private Date dhUpdateRecord;
-
 }

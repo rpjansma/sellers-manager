@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -25,6 +26,8 @@ public class Region {
     @Column(name = "NAME", length = 50, nullable = false)
     @NotNull
     private String name;
+
+    private ArrayList<String> states;
 
     @Column(name = "INCLUSION_DATE", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

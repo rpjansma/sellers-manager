@@ -4,16 +4,13 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RegionDTOTest {
 
     RegionDTO regionDTO;
     Integer id = 1;
     String name = "name";
-    List<String> states = new ArrayList<>();
+    ArrayList<String> states = new ArrayList<>();
     Date dhRecordInclusion = new Date();
     Date dhUpdateRecord = new Date();
 
