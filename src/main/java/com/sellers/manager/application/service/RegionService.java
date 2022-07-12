@@ -42,14 +42,6 @@ public class RegionService {
         return regionAssembler.toRegionDTO(region);
     }
 
-    public void pathRegion(RegionDTO regionDTO, Integer regionId) {
-        Optional.ofNullable(regionGateway.getById(regionId)
-                .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
-        Region region = regionAssembler.toRegion(regionDTO);
-
-        regionGateway.save(region);
-    }
-
     public void deleteRegion(Integer regionId) {
         Optional<Region> region = regionGateway.getById(regionId);
         regionValidator.checkRegionPresent(region);

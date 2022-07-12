@@ -1,5 +1,6 @@
 package com.sellers.manager.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sellers.manager.application.enums.StateEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +19,13 @@ public class RegionDTO {
 
     private Integer id;
 
+    @JsonProperty("regiao")
     @NotNull
     private String name;
 
+    @JsonProperty("estados")
     @NotNull
-    private List<StateEnum> states;
+    private List<String> states;
 
     private Date dhRecordInclusion;
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +21,10 @@ public class SellerService {
     private final SellerValidator sellerValidator;
     private final SellerAssembler sellerAssembler;
 
-    public List<Seller> getAllSellers() {
-        return sellerGateway.getAllSeller();
+    public List<SellerDTO> getAllSellers() {
+        sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
+
+        return sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
     }
 
     public SellerDTO getById(Integer sellerId) {
@@ -40,14 +43,6 @@ public class SellerService {
         sellerGateway.save(seller);
 
         return sellerAssembler.toSellerDTO(seller);
-    }
-
-    public void pathSeller(SellerDTO sellerDTO, Integer regionId) {
-        Optional.ofNullable(sellerGateway.getById(regionId)
-                .orElseThrow(() -> new NoContentException("Vendedor não localizado.")));
-        Seller seller = sellerAssembler.toSeller(sellerDTO);
-
-        sellerGateway.save(seller);
     }
 
     public void deleteSeller(Integer regionId) {

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class SellersController {
     private final SellerService sellerService;
 
     @GetMapping(value = "/", name = "Consulta de todas os vendedores")
-    public ResponseEntity getAllActuationRegions() {
+    public ResponseEntity<List<SellerDTO>> getAllActuationRegions() {
         return ResponseEntity.ok(sellerService.getAllSellers());
     }
 

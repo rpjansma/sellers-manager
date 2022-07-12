@@ -38,9 +38,8 @@ public class Seller {
     @Column(name = "STATE", length = 2)
     private String state;
 
-    @Column(name = "REGION", length = 15)
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REGION_ID", referencedColumnName = "REGION_ID", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Region region;
 
     @Column(name = "INCLUSION_DATE", nullable = false, updatable = false)

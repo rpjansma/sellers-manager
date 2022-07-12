@@ -20,6 +20,6 @@ public interface SellerGateway {
 
     Seller save(Seller seller);
 
-    void deleteRegion(Integer integer);
+    void deleteRegion(Integer id);
 
 }

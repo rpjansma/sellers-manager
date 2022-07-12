@@ -1,8 +1,6 @@
 package com.sellers.manager.infrastructure.gateway;
 
-import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
-import com.sellers.manager.application.gateway.RegionGateway;
 import com.sellers.manager.application.gateway.SellerGateway;
 import com.sellers.manager.infrastructure.repository.SellerRepository;
 import lombok.AllArgsConstructor;
@@ -21,7 +19,7 @@ public class SellerGatewayImpl implements SellerGateway {
 
     @Override
     public Optional<Seller> getById(Integer id) {
-        return Optional.empty();
+        return sellerRepository.findById(id);
     }
 
     @Override
@@ -36,15 +34,16 @@ public class SellerGatewayImpl implements SellerGateway {
 
     @Override
     public List<Seller> getAllSeller() {
-        return null;
+        return sellerRepository.findAll();
     }
 
     @Override
     public Seller save(Seller seller) {
-        return null;
+        return sellerRepository.save(seller);
     }
 
     @Override
-    public void deleteRegion(Integer integer) {
+    public void deleteRegion(Integer id) {
+        sellerRepository.deleteById(id);
     }
 }
