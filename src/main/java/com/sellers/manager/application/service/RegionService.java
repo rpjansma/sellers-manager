@@ -5,6 +5,7 @@ import com.sellers.manager.application.dto.RegionDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.gateway.RegionGateway;
 import com.sellers.manager.application.validator.RegionValidator;
+import com.sellers.manager.userinterface.exception.BadRequestException;
 import com.sellers.manager.userinterface.exception.NoContentException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,16 +29,9 @@ public class RegionService {
         return regionList;
     }
 
-    public RegionDTO getById(Integer regionId) {
-        Optional<Region> region = Optional.ofNullable(regionGateway.getById(regionId)
-                .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
-
-        return regionAssembler.toRegionDTO(region.get());
-    }
-
     public Region getByName(String name) {
         Optional<Region> region = Optional.ofNullable(regionGateway.getByName(name)
-                .orElseThrow(() -> new NoContentException("A Região não foi localizada.")));
+                .orElseThrow(() -> new BadRequestException("A Região não foi localizada.")));
 
         return region.get();
     }
@@ -51,12 +45,6 @@ public class RegionService {
         regionGateway.save(region);
 
         return regionAssembler.toRegionDTO(region);
-    }
-
-    public void deleteRegion(Integer regionId) {
-        Optional<Region> region = regionGateway.getById(regionId);
-        regionValidator.checkRegionPresent(region);
-        regionGateway.deleteRegion(regionId);
     }
 
 }

@@ -55,10 +55,4 @@ public class SellerService {
         return sellerWithStatesDTO;
     }
 
-    public void deleteSeller(Integer regionId) {
-        Optional.ofNullable(sellerGateway.getById(regionId)
-                .orElseThrow(() -> new NoContentException("Vendedor não localizado")));
-        sellerGateway.deleteRegion(regionId);
-    }
-
 }
