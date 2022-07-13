@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -38,8 +39,8 @@ public class Seller {
     @Column(name = "STATE", length = 2)
     private String state;
 
-    @JoinColumn(name = "REGION_ID", referencedColumnName = "REGION_ID", insertable = false, updatable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REGION_ID", referencedColumnName = "REGION_ID")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Region region;
 
     @Column(name = "INCLUSION_DATE", nullable = false, updatable = false)
@@ -53,5 +54,9 @@ public class Seller {
     @Setter(AccessLevel.NONE)
     @UpdateTimestamp
     private Date dhUpdateRecord;
+
+    public ArrayList<String> getRegionStates() {
+        return this.getRegion().getStates();
+    }
 
 }

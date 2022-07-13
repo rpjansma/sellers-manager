@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,8 +21,11 @@ public class RegionService {
     private final RegionValidator regionValidator;
     private final RegionAssembler regionAssembler;
 
-    public List<Region> getAllRegions() {
-        return regionGateway.getAllRegions();
+    public List<RegionDTO> getAllRegions() {
+        List<RegionDTO> regionList = regionGateway.getAllRegions().stream().map(regionAssembler::toRegionDTO).collect(Collectors.toList());
+        if(regionList.isEmpty()) throw new NoContentException("Regiões não localizados.");
+
+        return regionList;
     }
 
     public RegionDTO getById(Integer regionId) {

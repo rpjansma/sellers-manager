@@ -1,7 +1,6 @@
 package com.sellers.manager.userinterface.controller;
 
 import com.sellers.manager.application.dto.RegionDTO;
-import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.service.RegionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class ActuationController {
     private final RegionService regionService;
 
     @GetMapping(value = "/", name = "Consulta de todas as regiões")
-    public ResponseEntity<List<Region>> getAllActuationRegions() {
+    public ResponseEntity<List<RegionDTO>> getAllActuationRegions() {
         return ResponseEntity.ok(regionService.getAllRegions());
     }
 

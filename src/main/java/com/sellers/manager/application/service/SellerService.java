@@ -1,8 +1,9 @@
 package com.sellers.manager.application.service;
 
 import com.sellers.manager.application.assembler.SellerAssembler;
-import com.sellers.manager.application.dto.RegionDTO;
 import com.sellers.manager.application.dto.SellerDTO;
+import com.sellers.manager.application.dto.SellerDataAndStatesDTO;
+import com.sellers.manager.application.dto.SellerWithStatesDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
@@ -24,8 +25,8 @@ public class SellerService {
     private final SellerAssembler sellerAssembler;
     private final RegionService regionService;
 
-    public List<SellerDTO> getAllSellers() {
-        List<SellerDTO> sellersList = sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDTO).collect(Collectors.toList());
+    public List<SellerDataAndStatesDTO> getAllSellers() {
+        List<SellerDataAndStatesDTO> sellersList = sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDataAndStatesDTO).collect(Collectors.toList());
         if(sellersList.isEmpty()) throw new NoContentException("Vendedores não localizados.");
 
         return sellersList;
@@ -38,7 +39,7 @@ public class SellerService {
         return sellerAssembler.toSellerDTO(seller.get());
     }
 
-    public SellerDTO createSeller(SellerDTO sellerDTO) {
+    public SellerWithStatesDTO createSeller(SellerDTO sellerDTO) {
         List<Seller> sellers = sellerGateway.getAllSeller();
         sellerValidator.sellerUniqueName(sellers, sellerDTO);
 
@@ -48,7 +49,10 @@ public class SellerService {
         seller.setRegion(region);
         sellerGateway.save(seller);
 
-        return sellerAssembler.toSellerDTO(seller);
+        SellerWithStatesDTO sellerWithStatesDTO = sellerAssembler.toSellerWithStatesDTO(seller);
+        sellerWithStatesDTO.setStates(region.getStates());
+
+        return sellerWithStatesDTO;
     }
 
     public void deleteSeller(Integer regionId) {

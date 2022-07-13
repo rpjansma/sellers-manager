@@ -1,6 +1,7 @@
 package com.sellers.manager.userinterface.controller;
 
 import com.sellers.manager.application.dto.SellerDTO;
+import com.sellers.manager.application.dto.SellerDataAndStatesDTO;
 import com.sellers.manager.application.service.SellerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class SellersController {
     private final SellerService sellerService;
 
     @GetMapping(value = "/", name = "Consulta de todas os vendedores")
-    public ResponseEntity<List<SellerDTO>> getAllActuationRegions() {
+    public ResponseEntity<List<SellerDataAndStatesDTO>> getAllActuationRegions() {
         return ResponseEntity.ok(sellerService.getAllSellers());
     }
 
