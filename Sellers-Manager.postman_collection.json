@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "286804d6-07fb-4ef1-93a3-2e7c513fe26b",
+		"name": "Sellers-Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15809965"
+	},
+	"item": [
+		{
+			"name": "Endpoint Atuacao",
+			"item": [
+				{
+					"name": "getAllActuationsWithoutContent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is No Content 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/atuacao/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"atuacao",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createActuationSudeste",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"regiao\": \"sudeste\",\r\n    \"estados\": [\"SP\", \"RJ\", \"MG\", \"ES\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/atuacao/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"atuacao",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createActuationSul",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"regiao\": \"sul\",\r\n    \"estados\": [\"PR\", \"SC\", \"RS\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/atuacao/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"atuacao",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllActuationsWithSuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/atuacao/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"atuacao",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endpoint Vendedor",
+			"item": [
+				{
+					"name": "getAllWithNoContent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendedor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByIdWithNoContent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendedor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSellerActuatingOnSudesteWithSuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Raul\",\r\n    \"idade\": 25,\r\n    \"telefone\": 123456789,\r\n    \"cidade\": \"São Carlos\",\r\n    \"estado\": \"SP\",\r\n    \"regiao\": \"sudeste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vendedor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByIdWithSuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendedor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSellerActuatingOnSulWithSuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Juca Pipoca\",\r\n    \"idade\": 25,\r\n    \"telefone\": 987654321,\r\n    \"cidade\": \"Curitiba\",\r\n    \"estado\": \"PR\",\r\n    \"regiao\": \"sul\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vendedor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByIdWithSuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendedor/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllWithSuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendedor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendedor",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
