@@ -17,7 +17,7 @@ public class RegionDTO {
     private Integer id;
 
     @JsonProperty("regiao")
-    @NotNull
+    @NotNull(message = "O campo nome deve ser preenchido.")
     private String name;
 
     @JsonProperty("estados")

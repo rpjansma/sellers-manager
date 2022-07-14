@@ -16,7 +16,7 @@ public class SellerDTO {
     private Integer id;
 
     @JsonProperty("nome")
-    @NotNull
+    @NotNull(message = "O campo nome deve ser preenchido.")
     private String name;
 
     @JsonProperty("telefone")

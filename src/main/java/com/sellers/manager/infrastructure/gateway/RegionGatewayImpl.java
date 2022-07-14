@@ -6,7 +6,6 @@ import com.sellers.manager.infrastructure.repository.RegionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,18 +16,8 @@ public class RegionGatewayImpl implements RegionGateway {
     private final RegionRepository regionRepository;
 
     @Override
-    public Optional<Region> getById(Integer id) {
-        return regionRepository.findById(id);
-    }
-
-    @Override
     public Optional<Region> getByName(String regionName) {
         return Optional.ofNullable(regionRepository.getByName(regionName));
-    }
-
-    @Override
-    public List<Region> getByNames(Collection<String> names) {
-        return regionRepository.getByNames(names);
     }
 
     @Override
@@ -39,10 +28,5 @@ public class RegionGatewayImpl implements RegionGateway {
     @Override
     public Region save(Region region) {
         return regionRepository.save(region);
-    }
-
-    @Override
-    public void deleteRegion(Integer RegionId) {
-        regionRepository.deleteById(RegionId);
     }
 }

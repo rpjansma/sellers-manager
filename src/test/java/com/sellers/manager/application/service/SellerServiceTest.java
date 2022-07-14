@@ -8,9 +8,8 @@ import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
 import com.sellers.manager.application.validator.SellerValidator;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.sellers.manager.userinterface.exception.NoContentException;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -54,6 +53,8 @@ class SellerServiceTest {
     }
 
     @Test
+    @DisplayName("Testing GET for all sellers list")
+    @Tag("unit")
     void getAllSellers() {
         List<Seller> sellerList = new ArrayList<>();
         List<SellerDataAndStatesDTO> sellerDTOList = new ArrayList<>();
@@ -69,6 +70,8 @@ class SellerServiceTest {
     }
 
     @Test
+    @DisplayName("Testing getting seller by id")
+    @Tag("unit")
     void getById() {
         Mockito.when(sellerGateway.getById(sellerDTO.getId())).thenReturn(Optional.ofNullable(seller));
         Mockito.when(sellerAssembler.toSellerWithStatesDTO(seller)).thenReturn(sellerWithStatesDTO);
@@ -79,6 +82,18 @@ class SellerServiceTest {
     }
 
     @Test
+    @DisplayName("Testing exception on getById")
+    @Tag("unit")
+    void getByIdUnsuccessfully() {
+        Optional<Seller> emptySeller = Optional.empty();
+        Mockito.when(sellerGateway.getById(sellerDTO.getId())).thenReturn(emptySeller);
+
+        Assertions.assertThrows(NoContentException.class, () -> sellerService.getById(sellerDTO.getId()));
+    }
+
+    @Test
+    @DisplayName("Testing creation of a seller")
+    @Tag("unit")
     void createSeller() {
         List<Seller> sellerList = new ArrayList<>();
         sellerList.add(seller);
@@ -96,4 +111,6 @@ class SellerServiceTest {
         Mockito.verify(sellerGateway, times(1)).save(seller);
         Mockito.verify(sellerAssembler, times(1)).toSellerWithStatesDTO(seller);
     }
+
+
 }

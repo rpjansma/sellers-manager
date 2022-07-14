@@ -5,9 +5,8 @@ import com.sellers.manager.application.dto.RegionDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.gateway.RegionGateway;
 import com.sellers.manager.application.validator.RegionValidator;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.sellers.manager.userinterface.exception.BadRequestException;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -42,6 +41,8 @@ class RegionServiceTest {
     }
 
     @Test
+    @DisplayName("Testing GET for all regions list")
+    @Tag("unit")
     void getAllRegions() {
         List<Region> regionList = new ArrayList<>();
         List<RegionDTO> regionDTOList = new ArrayList<>();
@@ -57,6 +58,8 @@ class RegionServiceTest {
     }
 
     @Test
+    @DisplayName("Testing getting region by name")
+    @Tag("unit")
     void getByName() {
         Mockito.when(regionGateway.getByName(regionDTO.getName())).thenReturn(Optional.ofNullable(region));
 
@@ -65,6 +68,19 @@ class RegionServiceTest {
     }
 
     @Test
+    @DisplayName("Testing exception on getByName")
+    @Tag("unit")
+    void getByNameUnsuccessfully() {
+        Optional<Region> emptyRegion = Optional.empty();
+
+        Mockito.when(regionGateway.getByName(regionDTO.getName())).thenReturn(emptyRegion);
+
+        Assertions.assertThrows(BadRequestException.class, () -> regionService.getByName(regionDTO.getName()));
+    }
+
+    @Test
+    @DisplayName("Testing creation of a region")
+    @Tag("unit")
     void createRegion() {
         List<Region> regionList = new ArrayList<>();
         regionList.add(region);
