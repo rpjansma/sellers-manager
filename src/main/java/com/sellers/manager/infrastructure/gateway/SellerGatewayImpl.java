@@ -21,7 +21,7 @@ public class SellerGatewayImpl implements SellerGateway {
     }
 
     @Override
-    public List<Seller> getAllSeller() {
+    public List<Seller> getAllSellers() {
         return sellerRepository.findAll();
     }
 

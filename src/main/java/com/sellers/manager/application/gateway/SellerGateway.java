@@ -10,7 +10,7 @@ public interface SellerGateway {
 
     Optional<Seller> getById(Integer id);
 
-    List<Seller> getAllSeller();
+    List<Seller> getAllSellers();
 
     Seller save(Seller seller);
 }

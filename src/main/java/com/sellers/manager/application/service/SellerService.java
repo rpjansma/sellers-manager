@@ -26,21 +26,21 @@ public class SellerService {
     private final RegionService regionService;
 
     public List<SellerDataAndStatesDTO> getAllSellers() {
-        List<SellerDataAndStatesDTO> sellersList = sellerGateway.getAllSeller().stream().map(sellerAssembler::toSellerDataAndStatesDTO).collect(Collectors.toList());
+        List<SellerDataAndStatesDTO> sellersList = sellerGateway.getAllSellers().stream().map(sellerAssembler::toSellerDataAndStatesDTO).collect(Collectors.toList());
         if(sellersList.isEmpty()) throw new NoContentException("Vendedores não localizados.");
 
         return sellersList;
     }
 
-    public SellerDTO getById(Integer sellerId) {
+    public SellerWithStatesDTO getById(Integer sellerId) {
         Optional<Seller> seller = Optional.ofNullable(sellerGateway.getById(sellerId)
                 .orElseThrow(() -> new NoContentException("Vendedor não localizado.")));
 
-        return sellerAssembler.toSellerDTO(seller.get());
+        return sellerAssembler.toSellerWithStatesDTO(seller.get());
     }
 
     public SellerWithStatesDTO createSeller(SellerDTO sellerDTO) {
-        List<Seller> sellers = sellerGateway.getAllSeller();
+        List<Seller> sellers = sellerGateway.getAllSellers();
         sellerValidator.sellerUniqueName(sellers, sellerDTO);
 
         Region region = regionService.getByName(sellerDTO.getRegion());

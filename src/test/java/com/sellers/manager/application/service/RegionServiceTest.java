@@ -39,7 +39,6 @@ class RegionServiceTest {
         regionService = new RegionService(regionGateway, regionValidator, regionAssembler);
         region = Region.builder().name("sudeste").build();
         regionDTO = RegionDTO.builder().name("sudeste").build();
-
     }
 
     @Test
