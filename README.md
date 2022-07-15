@@ -3,7 +3,7 @@ Project implementing RESTFul API to manage sellers and their regions of actuatio
 
 *To run this project you got to have Java 11, Maven 3+ and your preferred IDE installed*
 
-Download the collection Sellers-Manager.postman_collection and import on Postman to have get all requests and status tests in your local environment
+Download the collection Sellers-Manager.postman_collection and import on Postman, getting all requests and status tests in your local environment
 
 You can see the Open API documentation on http://localhost:8080/docs/swagger-ui/index.html after running the project
 
