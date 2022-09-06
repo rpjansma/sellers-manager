@@ -1,13 +1,15 @@
-package com.sellers.manager.application.service;
+package com.sellers.manager.application.service.implementation;
 
 import com.sellers.manager.application.assembler.RegionAssembler;
 import com.sellers.manager.application.dto.RegionDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.gateway.RegionGateway;
+import com.sellers.manager.application.service.gateway.RegionService;
 import com.sellers.manager.application.validator.RegionValidator;
 import com.sellers.manager.userinterface.exception.BadRequestException;
 import com.sellers.manager.userinterface.exception.NoContentException;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,8 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class RegionService {
+@Primary
+public class RegionServiceImpl implements RegionService {
 
     private final RegionGateway regionGateway;
     private final RegionValidator regionValidator;

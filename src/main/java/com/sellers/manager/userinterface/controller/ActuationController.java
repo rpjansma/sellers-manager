@@ -1,7 +1,7 @@
 package com.sellers.manager.userinterface.controller;
 
 import com.sellers.manager.application.dto.RegionDTO;
-import com.sellers.manager.application.service.RegionService;
+import com.sellers.manager.application.service.gateway.RegionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

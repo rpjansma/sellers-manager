@@ -7,6 +7,8 @@ import com.sellers.manager.application.dto.SellerWithStatesDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
+import com.sellers.manager.application.service.implementation.RegionServiceImpl;
+import com.sellers.manager.application.service.implementation.SellerServiceImpl;
 import com.sellers.manager.application.validator.SellerValidator;
 import com.sellers.manager.userinterface.exception.NoContentException;
 import org.junit.jupiter.api.*;
@@ -21,7 +23,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.times;
 
-class SellerServiceTest {
+class SellerServiceImplTest {
 
     @Mock
     SellerGateway sellerGateway;
@@ -30,9 +32,9 @@ class SellerServiceTest {
     @Mock
     SellerAssembler sellerAssembler;
     @Mock
-    RegionService regionService;
+    RegionServiceImpl regionServiceImpl;
 
-    SellerService sellerService;
+    SellerServiceImpl sellerServiceImpl;
 
     Seller seller;
     SellerDTO sellerDTO;
@@ -43,7 +45,7 @@ class SellerServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        sellerService = new SellerService(sellerGateway, sellerValidator, sellerAssembler, regionService);
+        sellerServiceImpl = new SellerServiceImpl(sellerGateway, sellerValidator, sellerAssembler, regionServiceImpl);
 
         seller = Seller.builder().build();
         sellerDTO = SellerDTO.builder().build();
@@ -64,7 +66,7 @@ class SellerServiceTest {
         Mockito.when(sellerGateway.getAllSellers()).thenReturn(sellerList);
         Mockito.when(sellerAssembler.toSellerDataAndStatesDTO(seller)).thenReturn(sellerDataAndStatesDTO);
 
-        Assertions.assertEquals(sellerDTOList, sellerService.getAllSellers());
+        Assertions.assertEquals(sellerDTOList, sellerServiceImpl.getAllSellers());
         Mockito.verify(sellerGateway, times(1)).getAllSellers();
         Mockito.verify(sellerAssembler, atLeast(1)).toSellerDataAndStatesDTO(seller);
     }
@@ -76,7 +78,7 @@ class SellerServiceTest {
         Mockito.when(sellerGateway.getById(sellerDTO.getId())).thenReturn(Optional.ofNullable(seller));
         Mockito.when(sellerAssembler.toSellerWithStatesDTO(seller)).thenReturn(sellerWithStatesDTO);
 
-        Assertions.assertEquals(sellerWithStatesDTO, sellerService.getById(sellerDTO.getId()));
+        Assertions.assertEquals(sellerWithStatesDTO, sellerServiceImpl.getById(sellerDTO.getId()));
         Mockito.verify(sellerGateway, times(1)).getById(sellerDTO.getId());
         Mockito.verify(sellerAssembler, times(1)).toSellerWithStatesDTO(seller);
     }
@@ -88,7 +90,7 @@ class SellerServiceTest {
         Optional<Seller> emptySeller = Optional.empty();
         Mockito.when(sellerGateway.getById(sellerDTO.getId())).thenReturn(emptySeller);
 
-        Assertions.assertThrows(NoContentException.class, () -> sellerService.getById(sellerDTO.getId()));
+        Assertions.assertThrows(NoContentException.class, () -> sellerServiceImpl.getById(sellerDTO.getId()));
     }
 
     @Test
@@ -100,12 +102,12 @@ class SellerServiceTest {
 
         Mockito.when(sellerGateway.getAllSellers()).thenReturn(sellerList);
         Mockito.doNothing().when(sellerValidator).sellerUniqueName(sellerList, sellerDTO);
-        Mockito.when(regionService.getByName(sellerDTO.getRegion())).thenReturn(region);
+        Mockito.when(regionServiceImpl.getByName(sellerDTO.getRegion())).thenReturn(region);
         Mockito.when(sellerAssembler.toSeller(sellerDTO)).thenReturn(seller);
         Mockito.when(sellerGateway.save(seller)).thenReturn(seller);
         Mockito.when(sellerAssembler.toSellerWithStatesDTO(seller)).thenReturn(sellerWithStatesDTO);
 
-        Assertions.assertEquals(sellerWithStatesDTO, sellerService.createSeller(sellerDTO));
+        Assertions.assertEquals(sellerWithStatesDTO, sellerServiceImpl.createSeller(sellerDTO));
         Mockito.verify(sellerValidator, times(1)).sellerUniqueName(sellerList, sellerDTO);
         Mockito.verify(sellerAssembler, times(1)).toSeller(sellerDTO);
         Mockito.verify(sellerGateway, times(1)).save(seller);

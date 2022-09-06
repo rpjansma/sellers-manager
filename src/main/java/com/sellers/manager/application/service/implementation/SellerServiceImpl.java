@@ -1,4 +1,4 @@
-package com.sellers.manager.application.service;
+package com.sellers.manager.application.service.implementation;
 
 import com.sellers.manager.application.assembler.SellerAssembler;
 import com.sellers.manager.application.dto.SellerDTO;
@@ -7,9 +7,11 @@ import com.sellers.manager.application.dto.SellerWithStatesDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
+import com.sellers.manager.application.service.gateway.SellerService;
 import com.sellers.manager.application.validator.SellerValidator;
 import com.sellers.manager.userinterface.exception.NoContentException;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +20,13 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class SellerService {
+@Primary
+public class SellerServiceImpl implements SellerService {
 
     private final SellerGateway sellerGateway;
     private final SellerValidator sellerValidator;
     private final SellerAssembler sellerAssembler;
-    private final RegionService regionService;
+    private final RegionServiceImpl regionServiceImpl;
 
     public List<SellerDataAndStatesDTO> getAllSellers() {
         List<SellerDataAndStatesDTO> sellersList = sellerGateway.getAllSellers().stream().map(sellerAssembler::toSellerDataAndStatesDTO).collect(Collectors.toList());
@@ -43,7 +46,7 @@ public class SellerService {
         List<Seller> sellers = sellerGateway.getAllSellers();
         sellerValidator.sellerUniqueName(sellers, sellerDTO);
 
-        Region region = regionService.getByName(sellerDTO.getRegion());
+        Region region = regionServiceImpl.getByName(sellerDTO.getRegion());
 
         Seller seller = sellerAssembler.toSeller(sellerDTO);
         seller.setRegion(region);

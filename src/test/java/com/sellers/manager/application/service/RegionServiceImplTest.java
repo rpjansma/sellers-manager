@@ -4,6 +4,7 @@ import com.sellers.manager.application.assembler.RegionAssembler;
 import com.sellers.manager.application.dto.RegionDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.gateway.RegionGateway;
+import com.sellers.manager.application.service.implementation.RegionServiceImpl;
 import com.sellers.manager.application.validator.RegionValidator;
 import com.sellers.manager.userinterface.exception.BadRequestException;
 import org.junit.jupiter.api.*;
@@ -18,7 +19,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.times;
 
-class RegionServiceTest {
+class RegionServiceImplTest {
 
     @Mock
     RegionGateway regionGateway;
@@ -27,7 +28,7 @@ class RegionServiceTest {
     @Mock
     RegionAssembler regionAssembler;
 
-    RegionService regionService;
+    RegionServiceImpl regionServiceImpl;
     Region region;
     RegionDTO regionDTO;
 
@@ -35,7 +36,7 @@ class RegionServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        regionService = new RegionService(regionGateway, regionValidator, regionAssembler);
+        regionServiceImpl = new RegionServiceImpl(regionGateway, regionValidator, regionAssembler);
         region = Region.builder().name("sudeste").build();
         regionDTO = RegionDTO.builder().name("sudeste").build();
     }
@@ -52,7 +53,7 @@ class RegionServiceTest {
         Mockito.when(regionGateway.getAllRegions()).thenReturn(regionList);
         Mockito.when(regionAssembler.toRegionDTO(region)).thenReturn(regionDTO);
 
-        Assertions.assertEquals(regionDTOList, regionService.getAllRegions());
+        Assertions.assertEquals(regionDTOList, regionServiceImpl.getAllRegions());
         Mockito.verify(regionGateway, times(1)).getAllRegions();
         Mockito.verify(regionAssembler, atLeast(1)).toRegionDTO(region);
     }
@@ -63,7 +64,7 @@ class RegionServiceTest {
     void getByName() {
         Mockito.when(regionGateway.getByName(regionDTO.getName())).thenReturn(Optional.ofNullable(region));
 
-        Assertions.assertEquals(region, regionService.getByName(regionDTO.getName()));
+        Assertions.assertEquals(region, regionServiceImpl.getByName(regionDTO.getName()));
         Mockito.verify(regionGateway, times(1)).getByName(regionDTO.getName());
     }
 
@@ -75,7 +76,7 @@ class RegionServiceTest {
 
         Mockito.when(regionGateway.getByName(regionDTO.getName())).thenReturn(emptyRegion);
 
-        Assertions.assertThrows(BadRequestException.class, () -> regionService.getByName(regionDTO.getName()));
+        Assertions.assertThrows(BadRequestException.class, () -> regionServiceImpl.getByName(regionDTO.getName()));
     }
 
     @Test
@@ -91,7 +92,7 @@ class RegionServiceTest {
         Mockito.when(regionGateway.save(region)).thenReturn(region);
         Mockito.when(regionAssembler.toRegionDTO(region)).thenReturn(regionDTO);
 
-        Assertions.assertEquals(regionDTO, regionService.createRegion(regionDTO));
+        Assertions.assertEquals(regionDTO, regionServiceImpl.createRegion(regionDTO));
         Mockito.verify(regionValidator, times(1)).regionUniqueName(regionList, regionDTO);
         Mockito.verify(regionAssembler, times(1)).toRegion(regionDTO);
         Mockito.verify(regionGateway, times(1)).save(region);

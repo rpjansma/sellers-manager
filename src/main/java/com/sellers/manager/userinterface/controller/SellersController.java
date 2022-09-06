@@ -2,7 +2,7 @@ package com.sellers.manager.userinterface.controller;
 
 import com.sellers.manager.application.dto.SellerDTO;
 import com.sellers.manager.application.dto.SellerDataAndStatesDTO;
-import com.sellers.manager.application.service.SellerService;
+import com.sellers.manager.application.service.gateway.SellerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
