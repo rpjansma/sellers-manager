@@ -14,8 +14,6 @@ class SellerDTOTest {
     Integer age = 99;
     String phoneNumber = "123456789";
     String region = "sudeste";
-    Date dhRecordInclusion = new Date();
-    Date dhUpdateRecord = new Date();
 
     @BeforeEach
     void setUp() {
@@ -27,8 +25,6 @@ class SellerDTOTest {
                 .phoneNumber(phoneNumber)
                 .state(state)
                 .region(region)
-                .dhRecordInclusion(dhRecordInclusion)
-                .dhUpdateRecord(dhUpdateRecord)
                 .build();
     }
 
@@ -42,8 +38,6 @@ class SellerDTOTest {
         Assertions.assertEquals(phoneNumber, sellerDTO.getPhoneNumber());
         Assertions.assertEquals(region, sellerDTO.getRegion());
         Assertions.assertEquals(state, sellerDTO.getState());
-        Assertions.assertEquals(dhRecordInclusion, sellerDTO.getDhRecordInclusion());
-        Assertions.assertEquals(dhUpdateRecord, sellerDTO.getDhUpdateRecord());
     }
 
     @Test
@@ -58,8 +52,6 @@ class SellerDTOTest {
         age = 19;
         phoneNumber = "987654321";
         region = "centro-oeste";
-        dhRecordInclusion = new Date();
-        dhUpdateRecord = new Date();
 
         sellerDTO.setId(id);
         sellerDTO.setName(name);
@@ -68,8 +60,6 @@ class SellerDTOTest {
         sellerDTO.setState(state);
         sellerDTO.setRegion(region);
         sellerDTO.setPhoneNumber(phoneNumber);
-        sellerDTO.setDhRecordInclusion(dhRecordInclusion);
-        sellerDTO.setDhUpdateRecord(dhUpdateRecord);
 
         Assertions.assertEquals(name, sellerDTO.getName());
         Assertions.assertEquals(age, sellerDTO.getAge());
@@ -77,8 +67,6 @@ class SellerDTOTest {
         Assertions.assertEquals(phoneNumber, sellerDTO.getPhoneNumber());
         Assertions.assertEquals(region, sellerDTO.getRegion());
         Assertions.assertEquals(state, sellerDTO.getState());
-        Assertions.assertEquals(dhRecordInclusion, sellerDTO.getDhRecordInclusion());
-        Assertions.assertEquals(dhUpdateRecord, sellerDTO.getDhUpdateRecord());
     }
 
 }

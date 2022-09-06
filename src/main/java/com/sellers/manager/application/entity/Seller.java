@@ -21,6 +21,7 @@ public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SELLER_ID", nullable = false, columnDefinition = "decimal(3,0)")
+    @Setter(AccessLevel.NONE)
     private Integer id;
 
     @Column(name = "NAME", length = 60, nullable = false)

@@ -21,6 +21,7 @@ public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REGION_ID", nullable = false, columnDefinition = "decimal(3,0)")
+    @Setter(AccessLevel.NONE)
     private Integer id;
 
     @Column(name = "NAME", length = 50, nullable = false)

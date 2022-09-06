@@ -1,4 +1,4 @@
-package com.sellers.manager.application.service;
+package com.sellers.manager.application.service.implementation;
 
 import com.sellers.manager.application.assembler.SellerAssembler;
 import com.sellers.manager.application.dto.SellerDTO;
