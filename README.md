@@ -1,7 +1,7 @@
 # Sellers-manager
 Project implementing RESTFul API to manage sellers and their regions of actuation
 
-*To run this project you got to have Java 11, Maven 3+ and your preferred IDE installed*
+*To run this project your environment got to be prepared with Java 11, Maven 3+ and your preferred IDE installed*
 
 Download the collection Sellers-Manager.postman_collection and import on Postman, getting all requests and status tests in your local environment
 
