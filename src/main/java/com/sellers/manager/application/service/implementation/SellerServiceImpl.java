@@ -7,6 +7,7 @@ import com.sellers.manager.application.dto.SellerWithStatesDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
+import com.sellers.manager.application.service.gateway.RegionService;
 import com.sellers.manager.application.service.gateway.SellerService;
 import com.sellers.manager.application.validator.SellerValidator;
 import com.sellers.manager.userinterface.exception.NoContentException;
@@ -26,7 +27,7 @@ public class SellerServiceImpl implements SellerService {
     private final SellerGateway sellerGateway;
     private final SellerValidator sellerValidator;
     private final SellerAssembler sellerAssembler;
-    private final RegionServiceImpl regionServiceImpl;
+    private final RegionService regionService;
 
     public List<SellerDataAndStatesDTO> getAllSellers() {
         List<SellerDataAndStatesDTO> sellersList = sellerGateway.getAllSellers().stream().map(sellerAssembler::toSellerDataAndStatesDTO).collect(Collectors.toList());
@@ -46,7 +47,7 @@ public class SellerServiceImpl implements SellerService {
         List<Seller> sellers = sellerGateway.getAllSellers();
         sellerValidator.sellerUniqueName(sellers, sellerDTO);
 
-        Region region = regionServiceImpl.getByName(sellerDTO.getRegion());
+        Region region = regionService.getByName(sellerDTO.getRegion());
 
         Seller seller = sellerAssembler.toSeller(sellerDTO);
         seller.setRegion(region);

@@ -7,7 +7,7 @@ import com.sellers.manager.application.dto.SellerWithStatesDTO;
 import com.sellers.manager.application.entity.Region;
 import com.sellers.manager.application.entity.Seller;
 import com.sellers.manager.application.gateway.SellerGateway;
-import com.sellers.manager.application.service.implementation.RegionServiceImpl;
+import com.sellers.manager.application.service.gateway.RegionService;
 import com.sellers.manager.application.service.implementation.SellerServiceImpl;
 import com.sellers.manager.application.validator.SellerValidator;
 import com.sellers.manager.userinterface.exception.NoContentException;
@@ -32,7 +32,7 @@ class SellerServiceImplTest {
     @Mock
     SellerAssembler sellerAssembler;
     @Mock
-    RegionServiceImpl regionServiceImpl;
+    RegionService regionService;
 
     SellerServiceImpl sellerServiceImpl;
 
@@ -45,7 +45,7 @@ class SellerServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        sellerServiceImpl = new SellerServiceImpl(sellerGateway, sellerValidator, sellerAssembler, regionServiceImpl);
+        sellerServiceImpl = new SellerServiceImpl(sellerGateway, sellerValidator, sellerAssembler, regionService);
 
         seller = Seller.builder().build();
         sellerDTO = SellerDTO.builder().build();
@@ -102,7 +102,7 @@ class SellerServiceImplTest {
 
         Mockito.when(sellerGateway.getAllSellers()).thenReturn(sellerList);
         Mockito.doNothing().when(sellerValidator).sellerUniqueName(sellerList, sellerDTO);
-        Mockito.when(regionServiceImpl.getByName(sellerDTO.getRegion())).thenReturn(region);
+        Mockito.when(regionService.getByName(sellerDTO.getRegion())).thenReturn(region);
         Mockito.when(sellerAssembler.toSeller(sellerDTO)).thenReturn(seller);
         Mockito.when(sellerGateway.save(seller)).thenReturn(seller);
         Mockito.when(sellerAssembler.toSellerWithStatesDTO(seller)).thenReturn(sellerWithStatesDTO);
