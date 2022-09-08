@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 class RegionServiceImplTest {
 
@@ -36,7 +35,7 @@ class RegionServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        regionServiceImpl = new RegionServiceImpl(regionGateway, regionValidator, regionAssembler);
+        regionServiceImpl = spy(new RegionServiceImpl(regionGateway, regionValidator, regionAssembler));
         region = Region.builder().name("sudeste").build();
         regionDTO = RegionDTO.builder().name("sudeste").build();
     }
@@ -54,6 +53,7 @@ class RegionServiceImplTest {
         Mockito.when(regionAssembler.toRegionDTO(region)).thenReturn(regionDTO);
 
         Assertions.assertEquals(regionDTOList, regionServiceImpl.getAllRegions());
+        Mockito.verify(regionServiceImpl, times(1)).getAllRegions();
         Mockito.verify(regionGateway, times(1)).getAllRegions();
         Mockito.verify(regionAssembler, atLeast(1)).toRegionDTO(region);
     }
@@ -65,6 +65,7 @@ class RegionServiceImplTest {
         Mockito.when(regionGateway.getByName(regionDTO.getName())).thenReturn(Optional.ofNullable(region));
 
         Assertions.assertEquals(region, regionServiceImpl.getByName(regionDTO.getName()));
+        Mockito.verify(regionServiceImpl, times(1)).getByName(regionDTO.getName());
         Mockito.verify(regionGateway, times(1)).getByName(regionDTO.getName());
     }
 
@@ -77,6 +78,8 @@ class RegionServiceImplTest {
         Mockito.when(regionGateway.getByName(regionDTO.getName())).thenReturn(emptyRegion);
 
         Assertions.assertThrows(BadRequestException.class, () -> regionServiceImpl.getByName(regionDTO.getName()));
+        Mockito.verify(regionServiceImpl, times(1)).getByName(regionDTO.getName());
+        Mockito.verify(regionGateway, times(1)).getByName(regionDTO.getName());
     }
 
     @Test
@@ -93,6 +96,7 @@ class RegionServiceImplTest {
         Mockito.when(regionAssembler.toRegionDTO(region)).thenReturn(regionDTO);
 
         Assertions.assertEquals(regionDTO, regionServiceImpl.createRegion(regionDTO));
+        Mockito.verify(regionServiceImpl, times(1)).createRegion(regionDTO);
         Mockito.verify(regionValidator, times(1)).regionUniqueName(regionList, regionDTO);
         Mockito.verify(regionAssembler, times(1)).toRegion(regionDTO);
         Mockito.verify(regionGateway, times(1)).save(region);
