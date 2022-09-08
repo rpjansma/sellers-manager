@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 class SellerServiceImplTest {
 
@@ -45,7 +44,7 @@ class SellerServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        sellerServiceImpl = new SellerServiceImpl(sellerGateway, sellerValidator, sellerAssembler, regionService);
+        sellerServiceImpl = spy(new SellerServiceImpl(sellerGateway, sellerValidator, sellerAssembler, regionService));
 
         seller = Seller.builder().build();
         sellerDTO = SellerDTO.builder().build();
@@ -67,6 +66,7 @@ class SellerServiceImplTest {
         Mockito.when(sellerAssembler.toSellerDataAndStatesDTO(seller)).thenReturn(sellerDataAndStatesDTO);
 
         Assertions.assertEquals(sellerDTOList, sellerServiceImpl.getAllSellers());
+        Mockito.verify(sellerServiceImpl, times(1)).getAllSellers();
         Mockito.verify(sellerGateway, times(1)).getAllSellers();
         Mockito.verify(sellerAssembler, atLeast(1)).toSellerDataAndStatesDTO(seller);
     }
@@ -79,6 +79,7 @@ class SellerServiceImplTest {
         Mockito.when(sellerAssembler.toSellerWithStatesDTO(seller)).thenReturn(sellerWithStatesDTO);
 
         Assertions.assertEquals(sellerWithStatesDTO, sellerServiceImpl.getById(sellerDTO.getId()));
+        Mockito.verify(sellerServiceImpl, times(1)).getById(sellerDTO.getId());
         Mockito.verify(sellerGateway, times(1)).getById(sellerDTO.getId());
         Mockito.verify(sellerAssembler, times(1)).toSellerWithStatesDTO(seller);
     }
@@ -91,6 +92,9 @@ class SellerServiceImplTest {
         Mockito.when(sellerGateway.getById(sellerDTO.getId())).thenReturn(emptySeller);
 
         Assertions.assertThrows(NoContentException.class, () -> sellerServiceImpl.getById(sellerDTO.getId()));
+        Mockito.verify(sellerServiceImpl, times(1)).getById(sellerDTO.getId());
+        Mockito.verify(sellerGateway, times(1)).getById(sellerDTO.getId());
+        Mockito.verify(sellerAssembler, times(0)).toSellerWithStatesDTO(seller);
     }
 
     @Test
@@ -108,6 +112,7 @@ class SellerServiceImplTest {
         Mockito.when(sellerAssembler.toSellerWithStatesDTO(seller)).thenReturn(sellerWithStatesDTO);
 
         Assertions.assertEquals(sellerWithStatesDTO, sellerServiceImpl.createSeller(sellerDTO));
+        Mockito.verify(sellerServiceImpl, times(1)).createSeller(sellerDTO);
         Mockito.verify(sellerValidator, times(1)).sellerUniqueName(sellerList, sellerDTO);
         Mockito.verify(sellerAssembler, times(1)).toSeller(sellerDTO);
         Mockito.verify(sellerGateway, times(1)).save(seller);
