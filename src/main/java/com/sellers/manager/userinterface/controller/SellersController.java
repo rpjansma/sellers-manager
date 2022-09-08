@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("vendedor")
+@RequestMapping("v1/vendedores")
 public class SellersController {
 
     private final SellerService sellerService;
 
-    @GetMapping(value = "/", name = "Consulta de todas os vendedores")
+    @GetMapping(name = "Consulta de todas os vendedores")
     public ResponseEntity<List<SellerDataAndStatesDTO>> getAllActuationRegions() {
         return ResponseEntity.ok(sellerService.getAllSellers());
     }
@@ -29,7 +29,7 @@ public class SellersController {
     }
 
 
-    @PostMapping(value = "/", name = "Cria novo vendedor")
+    @PostMapping(name = "Cria novo vendedor")
     public ResponseEntity post(@Valid @RequestBody SellerDTO sellerDTO) {
         return new ResponseEntity(sellerService.createSeller(sellerDTO), HttpStatus.CREATED);
     }

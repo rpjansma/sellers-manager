@@ -12,18 +12,18 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("atuacao")
+@RequestMapping("v1/regioes")
 public class ActuationController {
 
     private final RegionService regionService;
 
-    @GetMapping(value = "/", name = "Consulta de todas as regiões")
+    @GetMapping(name = "Consulta de todas as regiões")
     public ResponseEntity<List<RegionDTO>> getAllActuationRegions() {
         return ResponseEntity.ok(regionService.getAllRegions());
     }
 
 
-    @PostMapping(value = "/", name = "Cria nova região")
+    @PostMapping(name = "Cria nova região")
     public ResponseEntity<RegionDTO> post(@Valid @RequestBody RegionDTO regionDTO) {
         return new ResponseEntity<RegionDTO>(regionService.createRegion(regionDTO), HttpStatus.CREATED);
     }
