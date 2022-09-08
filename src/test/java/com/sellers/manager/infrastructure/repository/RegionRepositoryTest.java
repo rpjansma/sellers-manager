@@ -34,4 +34,12 @@ class RegionRepositoryTest {
     void connect_and_get_data_from_datasql() {
         Assertions.assertEquals(5, regionRepository.findAll().size());
     }
+
+    @Test
+    @DisplayName("Tests saving a new entity")
+    @Tag("unit")
+    void save_new_entity() {
+        regionRepository.save(region);
+        Assertions.assertEquals(region.getId(), regionRepository.getByName("name").getId());
+    }
 }

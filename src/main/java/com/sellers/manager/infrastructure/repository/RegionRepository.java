@@ -11,7 +11,4 @@ public interface RegionRepository extends JpaRepository<Region, Integer> {
     @Query("FROM Region p WHERE p.name = :name")
     Region getByName(String name);
 
-    @Query("FROM Region p WHERE p.name IN :names")
-    List<Region> getByNames(Collection<String> names);
-
 }
