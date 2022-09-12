@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,10 +33,9 @@ public class SellersController {
         return ResponseEntity.ok(sellerService.getById(sellerId));
     }
 
-
     @PostMapping(name = "Cria novo vendedor")
     public ResponseEntity post(@Valid @RequestBody SellerDTO sellerDTO) {
-        return new ResponseEntity(sellerService.createSeller(sellerDTO), HttpStatus.CREATED);
+        return ResponseEntity.created(URI.create("/v1/vendedores")).body(sellerService.createSeller(sellerDTO));
     }
 
 
