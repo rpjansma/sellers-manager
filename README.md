@@ -7,4 +7,4 @@ Download the collection Sellers-Manager.postman_collection and import on Postman
 
 You can see the Open API documentation on http://localhost:8080/docs/swagger-ui/index.html after running the project
 
-![image](https://user-images.githubusercontent.com/61030599/178980937-08d42818-f097-4577-b1f9-5512bc7b306f.png)
+![image](https://user-images.githubusercontent.com/61030599/189237262-e7fcfc0d-f21a-45b6-a7ea-213beacce349.png)
